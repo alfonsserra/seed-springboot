@@ -58,6 +58,25 @@ cd target
 java -jar seed-springboot-1.0.jar
 ```
 
+#### Run as a Service on Windows
+
+An option is to use the Windows Service Wrapper, steps:
+1. Take WinSW.exe or zip from the distribution
+1. Write seed-sprintboot-1.0.xml. Here you have a basic one but it can be customized to define for example dependencies.
+```xml
+<service>
+    <id>seed-springboot-1.0</id>
+    <name>seed-springboot-1.0</name>
+    <description>This runs Spring Boot Seed as a Service</description>
+    <env name="MYAPP_HOME" value="%BASE%"/>
+    <executable>java</executable>
+    <arguments>-Xmx256m -jar "%BASE%\seed-springboot-1.0.jar"</arguments>
+    <logmode>rotate</logmode>
+</service>
+```
+1. Run winsw install seed-sprintboot-1.0.xml
+1. Run winsw start seed-sprintboot-1.0.xml
+
 ### Certificate
 
 A self signed certificate is provided in order to show use how to setup the application.
@@ -117,5 +136,4 @@ See [Documentation](doc/README.md) section for further details about other techn
 [swagger]: https://swagger.io/
 [allure]: https://docs.qameta.io/allure/
 [junit]: https://junit.org/junit5/
-
 
